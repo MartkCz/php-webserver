@@ -1,5 +1,5 @@
 REPO:=martkcz/php-webserver
-VERSION:=1.0.0
+VERSION:=1.0.1
 
 all: build release
 

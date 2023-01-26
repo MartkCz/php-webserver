@@ -54,16 +54,20 @@ COPY conf/php-fpm/fpm-pool.conf /etc/php81/php-fpm.d/www.conf
 COPY conf/php/php.ini /etc/php81/conf.d/custom.ini
 
 # Configure nginx
-COPY conf/nginx/new.conf /etc/nginx/nginx.conf
+COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY conf/nginx/conf.d  /etc/nginx/conf.d/
-COPY conf/nginx/conf.p  /etc/nginx/conf.p/
+COPY conf/nginx/conf.m  /etc/nginx/conf.m/
+RUN mkdir /etc/nginx/conf.d/server /etc/nginx/conf.d/http
 
 # Shell scripts
 COPY bin/nginx-enable.sh /usr/bin/nginx-enable
 COPY bin/setup.sh /usr/bin/setup
 
+# Make app directories
+RUN mkdir /data /app /data/tmp /data/log
+
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
-RUN chown -R nobody.nobody /app /var/www/html /run /var/lib/nginx /var/log/nginx
+RUN chown -R nobody.nobody /app /var/www/html /run /var/lib/nginx /var/log/nginx /data
 
 WORKDIR /app/public
 

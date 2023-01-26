@@ -9,14 +9,15 @@ usage in Dockerfile:
 RUN nginx-enable <name>
 ```
 
-**cache** - enables http cache for 1 year \
-**no-www** - redirects url from www.* to * \
-**https** - redirects url to https
+**server/cache** - enables http cache for 1 year \
+**http/no-www** - redirects url from www.* to * \
+**http/https** - redirects url to https
 
 ## Setup project in Dockerfile
 
 Nette framework
 ```dockerfile
+WORKDIR /app # or /app/www
 RUN setup nette
 ```
 

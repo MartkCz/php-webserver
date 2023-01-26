@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
 
 php_ini="/etc/php81/conf.d/custom.ini"
+nginx_file="/etc/nginx/conf.d/default.conf"
 
 function replace_php_ini() {
-  search="^$1\s*=[^\n]+$"
+  search="$1\s*=[^\n]+"
   replace="$1 = $2"
 
-  grep -E "$search" "$php_ini"
+  grep -qE "$search" "$php_ini"
 
   if [ $? -ne 0 ]; then
     echo "Cannot find $1 in php.ini"
@@ -20,7 +21,7 @@ function replace_php_ini() {
 case $1 in
   "nette")
     rm -r /app/public
-    sed -i 's/root \/app\/public;/root \/app\/www;/g' conf/nginx/conf.d/default.conf
+    sed -i 's/root \/app\/public;/root \/app\/www;/g' $nginx_file
   ;;
   "php-production")
     replace_php_ini "memory_limit" "64M"
