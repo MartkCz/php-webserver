@@ -10,6 +10,8 @@ RUN nginx-enable <name>
 ```
 
 **server/cache** - enables http cache for 1 year \
+**server/livez** - add /livez \
+**server/readyz** - add /readyz \
 **http/no-www** - redirects url from www.* to * \
 **http/https** - redirects url to https
 
